@@ -1,0 +1,31 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <div class="container mt-5">
+        <!-- Cancel Alert -->
+        <div class="alert alert-danger text-center" role="alert">
+            <h2>Your Purchase Has Been Canceled</h2>
+            <p>We regret to inform you that your order could not be completed.</p>
+        </div>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+{% endblock %}

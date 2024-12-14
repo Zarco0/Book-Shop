@@ -1,0 +1,70 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+    
+    <div class="container pt-5">
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center" >Sl.No</th>
+            <th scope="col" class="text-center">Book Name</th>
+            <th scope="col" class="text-center">Book Price</th>
+            <th scope="col" class="text-center">Book Quantity</th>
+            <th scope="col" class="text-center">Action</th>
+            <th scope="col" class="text-center">Add to cart</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for book in page %}
+            <tr>
+                <th scope="row" class="text-center">{{forloop.counter}}</th>
+                <td class="text-center">{{book.title}}</td>
+                <td class="text-center">{{book.price}}</td>
+                <td class="text-center">{{book.quantity}}</td>
+                <td class="text-center"><a href="{% url 'webuser:details' book.id %}" class="btn btn-outline-primary">Details</a></td>
+                <td class="text-center"><a href="{% url 'webuser:addtocart' book.id %}" class="btn btn-outline-warning">Add to cart</a></td>
+            </tr>
+                {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="container">
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          {% if page.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+  
+          {% endif %}
+  
+          {% for num in page.paginator.page_range %}
+          <li class="page-item {% if page_number == num%}activate{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+          {% endfor %}
+  
+          {% if page.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+
+
+    </div>
+
+
+
+      {% endblock %}

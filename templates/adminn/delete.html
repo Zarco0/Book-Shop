@@ -1,0 +1,24 @@
+{% extends 'adminn/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
+        <div class="card" style="width: 400px;">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Delete Book</h3>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <p class="text-center">Are you sure you want to delete <b>{{ book.title }}</b>?</p>
+                    
+                    <div class="text-center">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                        <a href="{% url 'listview' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

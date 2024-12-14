@@ -1,0 +1,72 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% for msg in messages %}
+<script>
+ window.alert('{{ msg }}')
+</script>
+
+{% endfor %}
+
+    {% if not cart_items %}
+
+    <p>Your cart is empty</p>
+
+    {% else %}
+
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Sl.No</th>
+            <th scope="col" class="text-center">Book Name</th>
+            <th scope="col" class="text-center">Author</th>
+            <th scope="col" class="text-center">Price</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+          <tr>
+            <td scope="row" class="text-center">{{ forloop.counter}}</td>
+            <td class="text-center">{{ item.book.title }}</td>
+            <td class="text-center">{{ item.book.author }}</td>
+            <td class="text-center">{{ item.book.price }} ₹</td>
+            <td class="text-center">
+              <a href="{% url 'webuser:remove_cart' item.id %}" class="btn btn-outline-danger">Remove</a>
+
+            {% if item.quantity <= item.book.quantity %}
+
+            
+              <td><a href="{% url 'webuser:decrease_quantity' item.id %}"> <i class="bi bi-dash-circle-dotted"></i> </a></td>
+            <td><input type="number" name="quantity" value="{{ item.quantity }}" class="form-control w-auto" min="1"></td>
+            <td><a href="{% url 'webuser:increase_quantity' item.id %}"> <i class="bi bi-plus-circle-dotted"></i> </a></td>
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+
+          <form action="{% url 'webuser:create-checkout-session' %}" method="post">
+            {% csrf_token %}
+
+            <tr class="text-center">
+              <td class="fw-bold">Total Products: <span class="text-primary">{{ total_items }}</span></td>
+              <td class="fw-bold">Total Price: <span class="text-success">{{ total_price }} ₹</span></td>
+              <td class="fw-bold"><button id="checkout-button" type="submit" class="btn btn-outline-primary">Buy</button></td>
+          </tr>
+
+          </form>
+        
+        
+        </tbody>
+      </table>
+
+
+    {% endif %}
+
+
+
+{% endblock %}

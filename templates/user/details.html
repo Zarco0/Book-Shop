@@ -1,0 +1,17 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ book.image.url }}" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text text-center">{{ book.title }}</p>
+      <p class="card-text text-center">{{ book.price }}₹</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
